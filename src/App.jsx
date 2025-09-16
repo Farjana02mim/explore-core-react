@@ -1,6 +1,15 @@
 import Counter from './counter'
 import Batsman from './Batsman'
+import Users from './users'
 import './App.css'
+import { Suspense } from 'react'
+import Friends from './Friends'
+
+// const fetchUsers = fetch('https://jsonplaceholder.typicode.com/users')
+// .then(res => res.json())
+
+const friendsPromise = fetch('https://jsonplaceholder.typicode.com/users')
+.then(res => res.json())
 
 function App() {
   function handleClick(){
@@ -16,6 +25,14 @@ function App() {
       
       <h1>Vite + React</h1>
       <Batsman></Batsman>
+      {/* <Suspense fallback={<h2>Loading...</h2>}>
+        <Users fetchUsers={fetchUsers}></Users>
+      </Suspense> */}
+  <Suspense fallback={<h2>Loading...</h2>}>
+        <Friends friendsPromise={friendsPromise}></Friends>
+      </Suspense>
+
+      
       <Counter></Counter>
       <button onClick={handleClick}>click me</button>
 
